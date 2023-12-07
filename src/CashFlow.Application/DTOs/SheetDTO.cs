@@ -1,0 +1,9 @@
+﻿namespace CashFlow.Application.DTOs
+{
+    public class SheetDTO
+    {
+        public Guid? Id { get; set; }
+        public string Name { get; set; }
+        public Guid UserId { get; set; }
+    }
+}
