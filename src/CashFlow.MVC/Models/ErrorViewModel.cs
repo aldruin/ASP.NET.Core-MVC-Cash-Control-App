@@ -1,4 +1,4 @@
-namespace CashFlow.Domain.Models
+namespace CashFlow.MVC.Models
 {
     public class ErrorViewModel
     {

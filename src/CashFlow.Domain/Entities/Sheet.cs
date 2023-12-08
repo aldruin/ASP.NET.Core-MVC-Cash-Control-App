@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CashFlow.Domain.Models
+namespace CashFlow.Domain.Entities
 {
     public class Sheet
     {

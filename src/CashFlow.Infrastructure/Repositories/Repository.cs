@@ -16,13 +16,13 @@ namespace CashFlow.Infrastructure.Repositories
             Query = Context.Set<T>();
         }
 
-        public async Task AddAsync(T model)
+        public async Task AddAsync(T entity)
         {
-            if (model == null)
+            if (entity == null)
             {
-                throw new ArgumentNullException(nameof(model), "O model não pode ser nula.");
+                throw new ArgumentNullException(nameof(entity), "O entity não pode ser nula.");
             }
-            await Query.AddAsync(model);
+            await Query.AddAsync(entity);
             await Context.SaveChangesAsync();
         }
 
@@ -33,8 +33,8 @@ namespace CashFlow.Infrastructure.Repositories
 
         public async Task DeleteAsync(Guid id)
         {
-            var model = await Query.FindAsync(id);
-            Query.Remove(model);
+            var entity = await Query.FindAsync(id);
+            Query.Remove(entity);
             await Context.SaveChangesAsync();
         }
 
@@ -57,9 +57,9 @@ namespace CashFlow.Infrastructure.Repositories
             return await Query.FindAsync(id);
         }
 
-        public async Task UpdateAsync(T model)
+        public async Task UpdateAsync(T entity)
         {
-            Query.Update(model);
+            Query.Update(entity);
             await Context.SaveChangesAsync();
         }
     }

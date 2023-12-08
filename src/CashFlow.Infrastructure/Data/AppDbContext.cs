@@ -1,4 +1,4 @@
-﻿using CashFlow.Domain.Models;
+﻿using CashFlow.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

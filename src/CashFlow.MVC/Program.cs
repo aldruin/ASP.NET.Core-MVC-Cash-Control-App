@@ -1,9 +1,9 @@
-using CashFlow.Domain.Models;
 using CashFlow.Application;
 using CashFlow.Infrastructure;
 using CashFlow.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using CashFlow.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 string sqlServerConnection = builder.Configuration.GetConnectionString("DefaultConnection")
            ?? throw new Exception("A string de conex?o 'DefaultConnection' n?o foi configurada");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(sqlServerConnection));
+
 
 builder.Services
             .RegisterApplication(builder.Configuration)
@@ -25,10 +26,13 @@ builder.Services.AddControllersWithViews();
 
 
 //identity configure
-builder.Services.AddIdentity<User, IdentityRole<Guid>>()
+builder.Services.AddIdentity<User, IdentityRole<Guid>>
+    (options =>{
+        options.SignIn.RequireConfirmedAccount = false; 
+        options.User.RequireUniqueEmail = true;
+    })
         .AddEntityFrameworkStores<AppDbContext>()
         .AddDefaultTokenProviders();
-
 
 
 

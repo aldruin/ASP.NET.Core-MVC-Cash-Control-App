@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CashFlow.Application.DTOs;
 using CashFlow.Application.Interfaces;
+using CashFlow.Domain.Entities;
 using CashFlow.Domain.Interfaces;
-using CashFlow.Domain.Models;
 
 namespace CashFlow.Application.Services;
 

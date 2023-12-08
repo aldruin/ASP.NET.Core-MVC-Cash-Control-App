@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace CashFlow.Domain.Models
+namespace CashFlow.Domain.Entities
 {
     public class User : IdentityUser <Guid>
     {

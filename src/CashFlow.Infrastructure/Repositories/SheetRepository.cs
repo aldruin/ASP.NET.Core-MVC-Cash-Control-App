@@ -1,5 +1,5 @@
-﻿using CashFlow.Domain.Interfaces;
-using CashFlow.Domain.Models;
+﻿using CashFlow.Domain.Entities;
+using CashFlow.Domain.Interfaces;
 using CashFlow.Infrastructure.Data;
 
 namespace CashFlow.Infrastructure.Repositories

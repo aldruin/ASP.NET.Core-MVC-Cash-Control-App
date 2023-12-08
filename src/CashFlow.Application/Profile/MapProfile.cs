@@ -1,5 +1,5 @@
 ﻿using CashFlow.Application.DTOs;
-using CashFlow.Domain.Models;
+using CashFlow.Domain.Entities;
 
 namespace CashFlow.Application.Profile
 {

@@ -1,4 +1,4 @@
-using CashFlow.Domain.Models;
+using CashFlow.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
