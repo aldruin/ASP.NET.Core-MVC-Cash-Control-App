@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CashFlow.Application.DTOs.SheetDTO>
+
+<h2>Planilhas</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th class="action-column">Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sheet in Model)
+        {
+            <tr>
+                <td>@sheet.Name</td>
+                <td class="action-column">
+                    <!-- Link para a ação Details -->
+                    <a asp-action="Details" asp-route-id="@sheet.Id">Detalhes</a> |
+                    <!-- Link para a ação Edit -->
+                    <a asp-action="Edit" asp-route-id="@sheet.Id">Editar</a> |
+                    <!-- Link para a ação Delete -->
+                    <a asp-action="Delete" asp-route-id="@sheet.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Adicione uma linha para o link Create abaixo da tabela -->
+<p>
+    <a asp-action="Create">Criar uma nova planilha</a>
+</p>
+
+<style>
+    /* Adicione um estilo para a coluna de ação */
+    .action-column {
+        margin-right: 20px; /* Ajuste o valor conforme necessário para aumentar o espaçamento */
+    }
+</style>
