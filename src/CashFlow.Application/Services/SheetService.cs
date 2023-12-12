@@ -54,26 +54,13 @@ namespace CashFlow.Application.Services
 
         public async Task<SheetDTO> GetByIdAsync(Guid sheetId)
         {
-            var userId = GetCurrentUserId();
             var sheet = await _sheetRepository.GetByIdAsync(sheetId);
-
-            if (sheet?.UserId != userId)
-            {
-                return null;
-            }
-
             return _mapper.Map<SheetDTO>(sheet);
         }
 
         public async Task<SheetDTO> UpdateByIdAsync(Guid sheetId, SheetDTO sheetDTO)
         {
-            var userId = GetCurrentUserId();
             var sheet = await _sheetRepository.GetByIdAsync(sheetId);
-
-            if (sheet?.UserId != userId)
-            {
-                return null;
-            }
 
             sheet.Update(sheetDTO.Name);
             await _sheetRepository.UpdateAsync(sheet);
@@ -82,13 +69,7 @@ namespace CashFlow.Application.Services
 
         public async Task<SheetDTO> DeleteByIdAsync(Guid sheetId)
         {
-            var userId = GetCurrentUserId();
             var sheet = await _sheetRepository.GetByIdAsync(sheetId);
-
-            if (sheet?.UserId != userId)
-            {
-                return null;
-            }
 
             if (sheet == null)
             {

@@ -50,16 +50,12 @@ namespace CashFlow.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (Guid.TryParse(userIdString, out Guid userId))
-                {
-                    sheetDTO.UserId = userId;
 
-                    await _sheetService.CreateSheetAsync(sheetDTO);
+                await _sheetService.CreateSheetAsync(sheetDTO);
 
-                    return RedirectToAction(nameof(Index));
-                }
+                return RedirectToAction(nameof(Index));
             }
+
             return View(sheetDTO);
         }
 
