@@ -16,7 +16,7 @@
                 <td>@sheet.Name</td>
                 <td class="action-column">
                     <!-- Link para a ação Details -->
-                    <a asp-action="Details" asp-route-id="@sheet.Id">Detalhes</a> |
+                    <a asp-action="Index" asp-controller="FinancialEntry" asp-route-sheetId="@sheet.Id">Detalhes</a> |
                     <!-- Link para a ação Edit -->
                     <a asp-action="Edit" asp-route-id="@sheet.Id">Editar</a> |
                     <!-- Link para a ação Delete -->

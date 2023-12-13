@@ -52,9 +52,9 @@ public class FinancialEntryService : IFinancialEntryService
             throw new Exception("Evento não encontrado");
         return _mapper.Map<FinancialEntryDTO>(entry);
     }
-    public async Task<List<FinancialEntryDTO>> GetAllAsync()
+    public async Task<List<FinancialEntryDTO>> GetAllAsync(Guid sheetId)
     {
-        var entry = await _financialEntryRepository.GetAllAsync();
+        var entry = await _financialEntryRepository.GetEntryBySheetIdAsync(sheetId);
         return _mapper.Map<List<FinancialEntryDTO>>(entry);
     }
 }

@@ -31,8 +31,9 @@
     </dd>
 </dl>
 
-<form asp-action="DeleteConfirmed" asp-controller="FinancialEntry" method="post">
-@*     <input type="hidden" asp-for="Id" /> *@
-    <button type="submit" class="btn btn-danger">Excluir</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+    <div class="form-group">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
 </form>

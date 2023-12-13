@@ -19,10 +19,10 @@ namespace CashFlow.MVC.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid sheetId)
         {
 
-            var entries = await _entryService.GetAllAsync();
+            var entries = await _entryService.GetAllAsync(sheetId);
 
 
             return View(entries);
@@ -90,7 +90,7 @@ namespace CashFlow.MVC.Controllers
                 await _entryService.DeleteEntryAsync(id);
                 return RedirectToAction(nameof(Index));
             }
-
+            ViewBag.ErrorMessage = "Erro ao excluir a entrada.";
             return View();
         }
     }

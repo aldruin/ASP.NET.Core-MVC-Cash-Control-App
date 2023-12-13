@@ -15,11 +15,13 @@ namespace CashFlow.MVC.Controllers
     {
         private readonly ISheetService _sheetService;
         private readonly UserManager<User> _userManager;
+        private readonly IFinancialEntryService _entryService;
 
-        public SheetController(ISheetService sheetService, UserManager<User> userManager)
+        public SheetController(ISheetService sheetService, UserManager<User> userManager, IFinancialEntryService entryService)
         {
             _sheetService = sheetService;
             _userManager = userManager;
+            _entryService = entryService;
         }
 
 
@@ -34,8 +36,9 @@ namespace CashFlow.MVC.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
-            var sheet = await _sheetService.GetByIdAsync(id);
-            return View(sheet);
+            var entries = await _entryService.GetEntryByIdAsync(id);
+            //var sheet = await _sheetService.GetByIdAsync(id);
+            return View(entries);
         }
 
         public async Task<IActionResult> Create()
