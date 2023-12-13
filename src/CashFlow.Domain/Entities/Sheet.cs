@@ -6,7 +6,7 @@ namespace CashFlow.Domain.Entities
     public class Sheet
     {
         [Key]
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [ForeignKey("User")]

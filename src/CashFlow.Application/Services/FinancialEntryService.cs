@@ -19,13 +19,14 @@ public class FinancialEntryService : IFinancialEntryService
 
     public async Task<FinancialEntryDTO> CreateEntryAsync(FinancialEntryDTO financialEntryDTO)
     {
-        if (financialEntryDTO.Value == null || financialEntryDTO.Name == null || financialEntryDTO.Category == null || financialEntryDTO.SheetId == null)
+        if (financialEntryDTO.Value == null || financialEntryDTO.Name == null || financialEntryDTO.Category == null)
             throw new Exception("Dados inválidos");
+
         var entry = _mapper.Map<FinancialEntry>(financialEntryDTO);
+
         await _financialEntryRepository.AddAsync(entry);
+
         return _mapper.Map<FinancialEntryDTO>(entry);
-
-
     }
     public async Task<FinancialEntryDTO> UpdateEntryAsync(FinancialEntryDTO financialEntryDTO, Guid entryId)
     {
@@ -44,7 +45,7 @@ public class FinancialEntryService : IFinancialEntryService
         await _financialEntryRepository.DeleteAsync(entryId);
         return null;
     }
-    public async Task<FinancialEntryDTO> GetEntryById(Guid entryId)
+    public async Task<FinancialEntryDTO> GetEntryByIdAsync(Guid entryId)
     {
         var entry = await _financialEntryRepository.GetByIdAsync(entryId);
         if (entry == null)

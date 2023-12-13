@@ -6,7 +6,7 @@ namespace CashFlow.Domain.Entities
     public class FinancialEntry
     {
         [Key]
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [ForeignKey("Sheet")]
@@ -23,7 +23,7 @@ namespace CashFlow.Domain.Entities
 
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
-        public decimal Value { get; set; }
+        public decimal? Value { get; set; }
 
         [Required]
         public string Category { get; set; }
@@ -31,7 +31,7 @@ namespace CashFlow.Domain.Entities
 
 
         protected FinancialEntry() { }
-        public void Update(string name, decimal value, string category, DateOnly entrydate)
+        public void Update(string name, decimal? value, string category, DateOnly entrydate)
         {
             Name = name;
             EntryDate = entrydate;

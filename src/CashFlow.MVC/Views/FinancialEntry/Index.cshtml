@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CashFlow.Application.DTOs.FinancialEntryDTO>
+
+<h2>Financial Entries</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Category</th>
+            <th>Entry Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model)
+        {
+            <tr>
+                <td>@entry.Name</td>
+                <td>@entry.Value</td>
+                <td>@entry.Category</td>
+                <td>@entry.EntryDate</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@entry.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@entry.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@entry.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
