@@ -8,6 +8,6 @@ namespace CashFlow.Application.Interfaces
         Task<FinancialExpenseDTO> UpdateExpenseAsync(FinancialExpenseDTO financialExpenseDTO, Guid expenseId);
         Task<FinancialExpenseDTO> DeleteExpenseAsync(Guid expenseId);
         Task<FinancialExpenseDTO> GetExpenseById(Guid expenseId);
-        Task<List<FinancialExpenseDTO>> GetAllAsync();
+        Task<List<FinancialExpenseDTO>> GetAllAsync(Guid sheetId);
     }
 }

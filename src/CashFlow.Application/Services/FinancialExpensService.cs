@@ -50,9 +50,9 @@ namespace CashFlow.Application.Services
                 throw new Exception("Evento não encontrado");
             return _mapper.Map<FinancialExpenseDTO>(expense);
         }
-        public async Task<List<FinancialExpenseDTO>> GetAllAsync()
+        public async Task<List<FinancialExpenseDTO>> GetAllAsync(Guid sheetId)
         {
-            var expense = await _financialExpenseRepository.GetAllAsync();
+            var expense = await _financialExpenseRepository.GetExpenseBySheetIdAsync(sheetId);
             return _mapper.Map<List<FinancialExpenseDTO>>(expense);
         }
     }

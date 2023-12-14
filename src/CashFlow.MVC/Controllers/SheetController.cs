@@ -16,12 +16,14 @@ namespace CashFlow.MVC.Controllers
         private readonly ISheetService _sheetService;
         private readonly UserManager<User> _userManager;
         private readonly IFinancialEntryService _entryService;
+        private readonly IFinancialExpenseService _expenseService;
 
-        public SheetController(ISheetService sheetService, UserManager<User> userManager, IFinancialEntryService entryService)
+        public SheetController(ISheetService sheetService, UserManager<User> userManager, IFinancialEntryService entryService, IFinancialExpenseService expenseService)
         {
             _sheetService = sheetService;
             _userManager = userManager;
             _entryService = entryService;
+            _expenseService = expenseService;
         }
 
 
@@ -36,10 +38,27 @@ namespace CashFlow.MVC.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
-            var entries = await _entryService.GetEntryByIdAsync(id);
-            //var sheet = await _sheetService.GetByIdAsync(id);
-            return View(entries);
+            var sheet = await _sheetService.GetByIdAsync(id);
+
+            if (sheet == null)
+            {
+                return NotFound();
+            }
+
+            var entries = await _entryService.GetAllAsync(id);
+
+            var expenses = await _expenseService.GetAllAsync(id);
+
+            var viewModel = new SheetDetailsViewModel
+            {
+                Sheet = sheet,
+                Entries = entries,
+                Expenses = expenses
+            };
+
+            return View(viewModel);
         }
+
 
         public async Task<IActionResult> Create()
         {

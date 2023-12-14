@@ -1,4 +1,4 @@
-﻿@model CashFlow.Application.DTOs.SheetDTO
+﻿@model SheetDetailsViewModel
 
 <h2>Sheet Details</h2>
 
@@ -7,15 +7,15 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Sheet.Name)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Sheet.Name)
         </dd>
     </dl>
 </div>
 
-<h4>Entradas</h4>
+<h4>Entradas de Receitas</h4>
 @if (Model.Entries != null && Model.Entries.Any())
 {
     <table class="table">
@@ -51,7 +51,48 @@ else
     <p>Nenhuma entrada encontrada.</p>
 }
 
+<h4>Entradas de Despesas</h4>
+@if (Model.Expenses != null && Model.Expenses.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Categoria</th>
+                <th>Data</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var expense in Model.Expenses)
+            {
+                <tr>
+                    <td>@expense.Name</td>
+                    <td>@expense.Value</td>
+                    <td>@expense.Category</td>
+                    <td>@expense.ExpenseDate</td>
+                    <td>
+                        <a asp-action="Details" asp-controller="FinancialExpense" asp-route-id="@expense.Id">Detalhes</a> |
+                        <a asp-action="Edit" asp-controller="FinancialExpense" asp-route-id="@expense.Id">Editar</a> |
+                        <a asp-action="Delete" asp-controller="FinancialExpense" asp-route-id="@expense.Id">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhuma entrada de despesa encontrada.</p>
+}
+
 <p>
-    <a asp-action="Index">Voltar para a Lista</a> |
-    <a asp-action="Create" asp-controller="FinancialEntry" asp-route-sheetId="@Model.Id">Criar Nova Entrada</a>
+    <a asp-action="Index">Voltar para a Lista</a>    
+</p>
+<p>
+    <a asp-action="Create" asp-controller="FinancialEntry" asp-route-sheetId="@Model.Sheet.Id">Criar Nova Entrada</a>
+</p>
+<p>
+    <a asp-action="Create" asp-controller="FinancialExpense" asp-route-sheetId="@Model.Sheet.Id">Criar Nova Saida</a>
 </p>
