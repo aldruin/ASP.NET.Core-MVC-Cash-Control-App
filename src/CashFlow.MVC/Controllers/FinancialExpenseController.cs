@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CashFlow.MVC.Controllers
 {
+    [Authorize]
     public class FinancialExpenseController : Controller
     {
         private readonly IFinancialExpenseService _expenseService;
