@@ -15,11 +15,8 @@
             <tr>
                 <td>@sheet.Name</td>
                 <td class="action-column">
-                    <!-- Link para a ação Details -->
                     <a asp-action="Index" asp-controller="FinancialEntry" asp-route-sheetId="@sheet.Id">Detalhes</a> |
-                    <!-- Link para a ação Edit -->
                     <a asp-action="Edit" asp-route-id="@sheet.Id">Editar</a> |
-                    <!-- Link para a ação Delete -->
                     <a asp-action="Delete" asp-route-id="@sheet.Id">Excluir</a>
                 </td>
             </tr>
@@ -27,14 +24,12 @@
     </tbody>
 </table>
 
-<!-- Adicione uma linha para o link Create abaixo da tabela -->
 <p>
     <a asp-action="Create">Criar uma nova planilha</a>
 </p>
 
 <style>
-    /* Adicione um estilo para a coluna de ação */
     .action-column {
-        margin-right: 20px; /* Ajuste o valor conforme necessário para aumentar o espaçamento */
+        margin-right: 20px;
     }
 </style>

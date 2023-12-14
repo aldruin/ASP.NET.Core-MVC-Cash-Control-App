@@ -28,23 +28,19 @@ namespace CashFlow.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Copia os dados do RegisterViewModel para o User
                 var user = new User
                 {
                     UserName = model.Email,
                     Email = model.Email
                 };
-                //Armazena os dados do usuário na tabela AspNetUsers
                 var result = await _userManager.CreateAsync(user, model.Password);
 
-                //Se o usuário foi criado com sucesso, faz o login usando o serviço SignInManager e redireciona para o método Action Index
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Sheet");
                 }
 
-                //Se houver erros então inclui no ModelState que será exibido pela tag helper summary na validação
 
                 foreach (var error in result.Errors)
                 {
@@ -80,7 +76,7 @@ namespace CashFlow.MVC.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Sheet");
         }
     }
 }
