@@ -51,7 +51,7 @@ namespace CashFlow.MVC.Controllers
 
                 await _entryService.CreateEntryAsync(entryDTO);
 
-                return RedirectToAction("Details", "Sheet");
+                return RedirectToAction("Details", "Sheet", new { id = entryDTO.SheetId });
             }
 
             return View(entryDTO);
@@ -70,7 +70,7 @@ namespace CashFlow.MVC.Controllers
             if (ModelState.IsValid)
             {
                 await _entryService.UpdateEntryAsync(entryDTO, id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Sheet", new { id = entryDTO.SheetId });
             }
 
             return View(entryDTO);
@@ -85,13 +85,19 @@ namespace CashFlow.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (ModelState.IsValid)
+            var entry = await _entryService.GetEntryByIdAsync(id);
+            if (entry == null)
             {
-                await _entryService.DeleteEntryAsync(id);
-                return RedirectToAction(nameof(Index));
+                ViewBag.ErrorMessage = "Entrada não encontrada.";
+                return View();
             }
-            ViewBag.ErrorMessage = "Erro ao excluir a entrada.";
-            return View();
+
+            var sheetId = entry.SheetId;
+
+            await _entryService.DeleteEntryAsync(id);
+
+            return RedirectToAction("Details", "Sheet", new { id = sheetId });
         }
+
     }
 }

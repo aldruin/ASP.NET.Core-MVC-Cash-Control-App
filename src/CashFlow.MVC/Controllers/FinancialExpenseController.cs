@@ -83,15 +83,20 @@ namespace CashFlow.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id, FinancialExpenseDTO expenseDTO)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (ModelState.IsValid)
+            var expense = await _expenseService.GetExpenseById(id);
+            if (expense == null)
             {
-                await _expenseService.DeleteExpenseAsync(id);
-                return RedirectToAction("Details", "Sheet", new { id = expenseDTO.SheetId });
+                ViewBag.ErrorMessage = "Saída não encontrada.";
+                return View();
             }
-            ViewBag.ErrorMessage = "Erro ao excluir a saída.";
-            return View();
+
+            var sheetId = expense.SheetId;
+
+            await _expenseService.DeleteExpenseAsync(id);
+
+            return RedirectToAction("Details", "Sheet", new { id = sheetId });
         }
     }
 }
