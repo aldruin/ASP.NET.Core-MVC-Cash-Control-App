@@ -37,7 +37,7 @@ namespace CashFlow.MVC.Controllers
             return View(expense);
         }
 
-        public async Task<IActionResult> Create(Guid sheetId)
+        public IActionResult Create(Guid sheetId)
         {
             ViewBag.SheetId = sheetId;
             return View();
@@ -61,6 +61,11 @@ namespace CashFlow.MVC.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var expense = await _expenseService.GetExpenseById(id);
+            if (expense == null)
+            {
+                ViewBag.ErrorMessage = "Saída não encontrada.";
+                return View();
+            }
             return View(expense);
         }
 
@@ -70,8 +75,15 @@ namespace CashFlow.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                var expense = await _expenseService.GetExpenseById(id);
+                if (expense == null)
+                {
+                    ViewBag.ErrorMessage = "Saída não encontrada.";
+                    return View();
+                }
+                var sheetId = expense.SheetId;
                 await _expenseService.UpdateExpenseAsync(expenseDTO, id);
-                return RedirectToAction("Details", "Sheet", new { id = expenseDTO.SheetId });
+                return RedirectToAction("Details", "Sheet", new { id = sheetId });
             }
 
             return View(expenseDTO);

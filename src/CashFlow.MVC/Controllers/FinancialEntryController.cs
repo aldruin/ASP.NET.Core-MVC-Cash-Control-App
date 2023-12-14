@@ -37,7 +37,7 @@ namespace CashFlow.MVC.Controllers
             return View(entry);
         }
 
-        public async Task<IActionResult> Create(Guid sheetId)
+        public IActionResult Create(Guid sheetId)
         {
             ViewBag.SheetId = sheetId;
             return View();
@@ -61,6 +61,11 @@ namespace CashFlow.MVC.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var entry = await _entryService.GetEntryByIdAsync(id);
+            if (entry == null)
+            {
+                ViewBag.ErrorMessage = "Entrada não encontrada.";
+                return View();
+            }
             return View(entry);
         }
 
@@ -70,8 +75,15 @@ namespace CashFlow.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                var entry = await _entryService.GetEntryByIdAsync(id);
+                if (entry == null)
+                {
+                    ViewBag.ErrorMessage = "Entrada não encontrada.";
+                    return View();
+                }
+                var sheetId = entry.SheetId;
                 await _entryService.UpdateEntryAsync(entryDTO, id);
-                return RedirectToAction("Details", "Sheet", new { id = entryDTO.SheetId });
+                return RedirectToAction("Details", "Sheet", new { id = sheetId });
             }
 
             return View(entryDTO);
