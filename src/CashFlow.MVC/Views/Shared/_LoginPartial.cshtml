@@ -11,7 +11,7 @@
     </li> *@
         <li class="nav-item">
             <form id="logoutForm" method="post" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Sair</button>
             </form>
         </li>
 
@@ -21,10 +21,10 @@
 else
 {
     <li class="nav-item">
-            <a class="nav-link text-dark" id="register" asp-controller="Account" asp-action="Register">Register</a>
+            <a class="nav-link text-dark" id="register" asp-controller="Account" asp-action="Register">Registrar</a>
     </li>
     <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-controller="Account" asp-action="Login">Login</a>
+            <a class="nav-link text-dark" id="login" asp-controller="Account" asp-action="Login">Entrar</a>
     </li>
 }
 </ul>

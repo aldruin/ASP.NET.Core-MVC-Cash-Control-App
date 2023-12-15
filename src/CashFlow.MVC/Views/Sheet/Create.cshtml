@@ -1,17 +1,19 @@
 ﻿@model CashFlow.Application.DTOs.SheetDTO
 
-<h2>Criar Nova Planilha</h2>
+<div class="container mt-3">
+    <h2>Criar Nova Planilha</h2>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="Name">Nome:</label>
-        <input asp-for="Name" class="form-control" required />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="Name">Nome:</label>
+            <input asp-for="Name" class="form-control" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Criar</button>
-</form>
+        <button type="submit" class="btn btn-primary">Criar</button>
+    </form>
 
-<p>
-    <a asp-action="Index">Voltar para a lista de planilhas</a>
-</p>
+    <p class="mt-3">
+        <a class="btn btn-outline-secondary" asp-action="Index">Voltar para a lista de planilhas</a>
+    </p>
+</div>

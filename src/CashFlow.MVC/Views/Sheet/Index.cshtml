@@ -1,35 +1,46 @@
 ﻿@model IEnumerable<CashFlow.Application.DTOs.SheetDTO>
 
-<h2>Planilhas</h2>
+<div class="container mt-3 text-center">
+    <h2>Planilhas</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th class="action-column">Ação</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var sheet in Model)
-        {
+    <table class="table mx-auto">
+        <thead>
             <tr>
-                <td>@sheet.Name</td>
-                <td class="action-column">
-                    <a asp-action="Details" asp-controller="Sheet" asp-route-id="@sheet.Id">Detalhes</a> |
-                    <a asp-action="Edit" asp-route-id="@sheet.Id">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@sheet.Id">Excluir</a> 
-                </td>
+                <th>Nome</th>
+                <th class="action-column">Ação</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @{
+                // Ordene as planilhas em ordem alfabética pelo nome
+                var sortedSheets = Model.OrderBy(sheet => sheet.Name);
+            }
 
-<p>
-    <a asp-action="Create">Criar uma nova planilha</a>
-</p>
+            @foreach (var sheet in sortedSheets)
+            {
+                <tr>
+                    <td>@sheet.Name</td>
+                    <td class="action-column">
+                        <a class="btn btn-outline-info" asp-action="Details" asp-controller="Sheet" asp-route-id="@sheet.Id">Detalhes</a>
+                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@sheet.Id">Editar</a>
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@sheet.Id">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>
+        <a class="btn btn-outline-secondary" asp-action="Create">Criar uma nova planilha</a>
+    </p>
+</div>
 
 <style>
     .action-column {
         margin-right: 20px;
+    }
+
+    table {
+        width: 80%;
     }
 </style>
