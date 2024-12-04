@@ -13,15 +13,8 @@ namespace CashFlow.Infrastructure.Repositories
 
         public async Task<ICollection<FinancialEntry>> GetEntryBySheetIdAsync(Guid sheetId)
         {
-            try
-            {
                 var entries = await Query.Cast<FinancialEntry>().Where(s => s.SheetId == sheetId).ToListAsync();
                 return entries;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
     }
 }
